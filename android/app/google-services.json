@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "618243697542",
+    "project_id": "pet-fit-884a6",
+    "storage_bucket": "pet-fit-884a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618243697542:android:d8e5434657c5ed087a5a07",
+        "android_client_info": {
+          "package_name": "com.example.pet_fit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEfpYrIWKpfKjDsQ2FkRps_uN_6KMX6tU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

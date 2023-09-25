@@ -66,7 +66,7 @@ class _AddPetScreenState extends State<AddPetScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Get.to(() => TakePictureScreen());
+                            Get.to(() => const TakePictureScreen());
                           },
                           child: const Text('Take Photo'),
                         ),
@@ -100,7 +100,7 @@ class _AddPetScreenState extends State<AddPetScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Get.to(() => TakeVideoScreen());
+                            Get.to(() => const TakeVideoScreen());
                           },
                           child: const Text('Take video'),
                         ),
@@ -135,6 +135,7 @@ class _AddPetScreenState extends State<AddPetScreen> {
   List<String> videos = [];
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add new pet'),
@@ -156,318 +157,350 @@ class _AddPetScreenState extends State<AddPetScreen> {
             },
             builder: (context, state) {
               if (state is AddPetLoading) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               return Padding(
                 padding:
                     const EdgeInsets.only(top: 18.0, left: 18.0, right: 18.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Text(
-                          "Pet Name:",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: TextField(
-                          controller: _petNameController,
-                          maxLines: null,
-                          decoration: InputDecoration(
-                            hintText: 'Enter Pet Name...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:
-                                  const BorderSide(color: Colors.deepPurple),
-                            ),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Text(
+                            "Pet Name:",
+                            style: TextStyle(fontSize: 20),
                           ),
-                        ))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Pet Location:",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: TextField(
-                            controller: _petLocationController,
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                              child: TextFormField(
+                            controller: _petNameController,
                             maxLines: null,
                             decoration: InputDecoration(
-                              hintText: 'Enter location...',
+                              hintText: 'Enter Pet Name...',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide:
                                     const BorderSide(color: Colors.deepPurple),
                               ),
                             ),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Pet DOB:",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Text(
-                            "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}"),
-                        ElevatedButton(
-                          onPressed: () {
-                            _selectDate(context);
-                          },
-                          child: const Text('Select Date'),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Pet Breed:",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: TextField(
-                          controller: _petBreedController,
-                          maxLines: null,
-                          decoration: InputDecoration(
-                            hintText: 'Enter breed...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:
-                                  const BorderSide(color: Colors.deepPurple),
-                            ),
-                          ),
-                        ))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      "Owner's Details:",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    TextField(
-                      controller: _petOwnerDetailsController,
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        hintText: 'Enter owner details...',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide:
-                              const BorderSide(color: Colors.deepPurple),
-                        ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Pet name is required';
+                              }
+                              return null;
+                            },
+                          ))
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        const Text("Add pets's photos/videos"),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            _showDialog(context);
-                          },
-                          child: const Icon(
-                            Icons.camera_alt_outlined,
-                            size: 35,
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          const Text(
+                            "Pet Location:",
+                            style: TextStyle(fontSize: 20),
                           ),
-                        )
-                      ],
-                    ),
-                    BlocConsumer<ImagePickerBloc, ImagePickerState>(
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        if (state is ImagesUploadedState) {
-                          images.addAll(state.imageUrls);
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: TextFormField(
+                              controller: _petLocationController,
+                              maxLines: null,
+                              decoration: InputDecoration(
+                                hintText: 'Enter location...',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                      color: Colors.deepPurple),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Location is required';
+                                }
+                                return null;
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Pet DOB:",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Text(
+                              "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}"),
+                          ElevatedButton(
+                            onPressed: () {
+                              _selectDate(context);
+                            },
+                            child: const Text('Select Date'),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          const Text(
+                            "Pet Breed:",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                              child: TextFormField(
+                            controller: _petBreedController,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              hintText: 'Enter breed...',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.deepPurple),
+                              ),
+                            ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Breed is required';
+                                  }
+                                  return null;
+                                },
+                          ))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        "Owner's Details:",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        controller: _petOwnerDetailsController,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          hintText: 'Enter owner details...',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide:
+                                const BorderSide(color: Colors.deepPurple),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Owner details is required';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          const Text("Add pets's photos/videos"),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              _showDialog(context);
+                            },
+                            child: const Icon(
+                              Icons.camera_alt_outlined,
+                              size: 35,
+                            ),
+                          )
+                        ],
+                      ),
+                      BlocConsumer<ImagePickerBloc, ImagePickerState>(
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          if (state is ImagesUploadedState) {
+                            images.addAll(state.imageUrls);
 
-                          return Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Selected photos",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                ListView(
-                                  shrinkWrap: true,
-                                  children: state.imageUrls
-                                      .map((url) => Text(
-                                            url,
-                                            overflow: TextOverflow.ellipsis,
-                                          ))
-                                      .toList(),
-                                ),
-                              ],
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                    BlocConsumer<VideoPickerBloc, VideoPickerState>(
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        if (state is VideosUploadedState) {
-                          videos.addAll(state.videoUrls);
-                          return Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Selected videos",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                ListView(
-                                  shrinkWrap: true,
-                                  children: state.videoUrls
-                                      .map((url) => Text(
-                                            url,
-                                            overflow: TextOverflow.ellipsis,
-                                          ))
-                                      .toList(),
-                                ),
-                              ],
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                    BlocConsumer<ImageCaptureBloc, ImageCaptureState>(
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        if (state is CapturedImagesUploadedState) {
-                          images.addAll(state.imageUrls);
-                          return Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Captured photos",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                ListView(
-                                  shrinkWrap: true,
-                                  children: state.imageUrls
-                                      .map((url) => Text(
-                                            url,
-                                            overflow: TextOverflow.ellipsis,
-                                          ))
-                                      .toList(),
-                                ),
-                              ],
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                    BlocConsumer<VideoCaptureBloc, VideoCaptureState>(
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        if (state is CapturedVideosUploadedState) {
-                          videos.addAll(state.videoUrls);
-                          return Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Captured videos",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                ListView(
-                                  shrinkWrap: true,
-                                  children: state.videoUrls
-                                      .map((url) => Text(
-                                            url,
-                                            overflow: TextOverflow.ellipsis,
-                                          ))
-                                      .toList(),
-                                ),
-                              ],
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        if (images.isEmpty) {
-                          Get.snackbar(
-                              "No Images", "Please upload atleast one image");
-                        } else {
-                          context
-                              .read<AddPetBloc>()
-                              .add(SubmitPetEvent(PetModel(
-                                name: _petNameController.text,
-                                breed: _petBreedController.text,
-                                location: _petLocationController.text,
-                                ownerId: "",
-                                ownerDetails: _petOwnerDetailsController.text,
-                                dob: Timestamp.fromDate(selectedDate),
-                                images: images,
-                                videos: videos,
-                              )));
-                          images = [];
-                          videos = [];
-                          _petNameController.clear();
-                          _petLocationController.clear();
-                          _petBreedController.clear();
-                          _petOwnerDetailsController.clear();
-                        }
-                      },
-                      child: proceedButton("Add Pet"),
-                    )
-                  ],
+                            return Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Selected photos",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  ListView(
+                                    shrinkWrap: true,
+                                    children: state.imageUrls
+                                        .map((url) => Text(
+                                              url,
+                                              overflow: TextOverflow.ellipsis,
+                                            ))
+                                        .toList(),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      BlocConsumer<VideoPickerBloc, VideoPickerState>(
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          if (state is VideosUploadedState) {
+                            videos.addAll(state.videoUrls);
+                            return Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Selected videos",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  ListView(
+                                    shrinkWrap: true,
+                                    children: state.videoUrls
+                                        .map((url) => Text(
+                                              url,
+                                              overflow: TextOverflow.ellipsis,
+                                            ))
+                                        .toList(),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      BlocConsumer<ImageCaptureBloc, ImageCaptureState>(
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          if (state is CapturedImagesUploadedState) {
+                            images.addAll(state.imageUrls);
+                            return Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Captured photos",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  ListView(
+                                    shrinkWrap: true,
+                                    children: state.imageUrls
+                                        .map((url) => Text(
+                                              url,
+                                              overflow: TextOverflow.ellipsis,
+                                            ))
+                                        .toList(),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      BlocConsumer<VideoCaptureBloc, VideoCaptureState>(
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          if (state is CapturedVideosUploadedState) {
+                            videos.addAll(state.videoUrls);
+                            return Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Captured videos",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  ListView(
+                                    shrinkWrap: true,
+                                    children: state.videoUrls
+                                        .map((url) => Text(
+                                              url,
+                                              overflow: TextOverflow.ellipsis,
+                                            ))
+                                        .toList(),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {if (images.isEmpty) {
+                            Get.snackbar(
+                                "No Images", "Please upload atleast one image");
+                          } else {
+                            context
+                                .read<AddPetBloc>()
+                                .add(SubmitPetEvent(PetModel(
+                              name: _petNameController.text,
+                              breed: _petBreedController.text,
+                              location: _petLocationController.text,
+                              ownerId: "",
+                              ownerDetails: _petOwnerDetailsController.text,
+                              dob: Timestamp.fromDate(selectedDate),
+                              images: images,
+                              videos: videos,
+                            )));
+                            images = [];
+                            videos = [];
+                            _petNameController.clear();
+                            _petLocationController.clear();
+                            _petBreedController.clear();
+                            _petOwnerDetailsController.clear();
+                          }}
+
+                        },
+                        child: proceedButton("Add Pet"),
+                      )
+                    ],
+                  ),
                 ),
               );
             },

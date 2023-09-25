@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet_fit/add_pet_module/add_pet.dart';
 import 'package:pet_fit/feedback_module/post_feedback.dart';
-import 'package:pet_fit/product_list_module/product_list_screen.dart';
 
 Widget buildDrawer(BuildContext context) {
   return Drawer(
@@ -28,12 +28,9 @@ Widget buildDrawer(BuildContext context) {
         ListTile(
           leading: const Icon(Icons.add),
           title: const Text('Add Pet'),
-          onTap: () {},
-        ),
-        ListTile(
-          leading: const Icon(Icons.shopping_cart),
-          title: const Text('Buy Product'),
-          onTap: () { Get.to(()=>ProductListScreen());},
+          onTap: () {
+            Get.to(()=>AddPetScreen());
+          },
         ),
         ListTile(
           leading: const Icon(Icons.person),

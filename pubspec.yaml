@@ -48,6 +48,9 @@ dependencies:
   cached_network_image: ^3.2.3
   firebase_storage: ^11.2.7
   video_player: ^2.7.2
+  url_launcher: ^6.1.14
+  image_picker: ^1.0.4
+  camera: ^0.10.5+4
 
 dev_dependencies:
   flutter_test:

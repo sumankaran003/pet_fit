@@ -27,6 +27,9 @@ class _VideoAppState extends State<VideoApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Video Player Screen"),
+      ),
         body: Center(
           child: _controller.value.isInitialized
               ? AspectRatio(

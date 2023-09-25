@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PetModel {
   final String name;
   final String breed;
   final String location;
   final String ownerId;
-  final int age;
+  final Timestamp dob;
+  final String ownerDetails;
+  //final int age;
   final List<String> images;
   final List<String> videos;
 
@@ -11,8 +15,9 @@ class PetModel {
     required this.name,
     required this.breed,
     required this.location,
+    required this.ownerDetails,
     required this.ownerId,
-    required this.age,
+    required this.dob,
     required this.images,
     required this.videos,
   });
@@ -24,7 +29,8 @@ class PetModel {
       breed: json['breed'],
       location: json['location'],
       ownerId: json['ownerId'],
-      age: json['age'],
+      ownerDetails: json['ownerDetails'],
+      dob: json['dob'],
       images: List<String>.from(json['images']),
       videos: List<String>.from(json['videos']),
     );
@@ -37,7 +43,8 @@ class PetModel {
       'breed': breed,
       'location': location,
       'ownerId': ownerId,
-      'age': age,
+      'ownerDetails': ownerDetails,
+      'dob': dob,
       'images': List<String>.from(images),
       'videos': List<String>.from(videos),
     };

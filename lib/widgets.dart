@@ -4,6 +4,8 @@ import 'package:pet_fit/models/product_model.dart';
 import 'package:pet_fit/screens/pet_details_screen.dart';
 import 'package:pet_fit/models/pet_model.dart';
 
+import 'models/age_model.dart';
+
 Widget proceedButton(String buttonText) {
   return Padding(
     padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
@@ -62,7 +64,7 @@ Widget petTiles(PetModel pet) {
                 Text("Name: ${pet.name}"),
                 Text("Breed: ${pet.breed}"),
                 Text("Location: ${pet.location}"),
-                Text("Age: ${pet.age}"),
+                SizedBox(width: Get.width*0.5, child: Text("Age: ${calculateAge(pet.dob.millisecondsSinceEpoch)}", )),
               ]),
         ],
       ),

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pet_fit/add_pet_module/add_pet.dart';
 import 'package:pet_fit/feedback_module/post_feedback.dart';
+import 'package:pet_fit/login_module/auth_bloc.dart';
+import 'package:pet_fit/login_module/auth_event.dart';
+import 'package:pet_fit/login_module/auth_state.dart';
 
 Widget buildDrawer(BuildContext context) {
   return Drawer(
@@ -29,14 +33,14 @@ Widget buildDrawer(BuildContext context) {
           leading: const Icon(Icons.add),
           title: const Text('Add Pet'),
           onTap: () {
-            Get.to(()=>AddPetScreen());
+            Get.to(() => AddPetScreen());
           },
         ),
         ListTile(
           leading: const Icon(Icons.person),
           title: const Text('Feedback'),
           onTap: () {
-            Get.to(()=>PostFeedback());
+            Get.to(() => PostFeedback());
           },
         ),
         ListTile(
@@ -54,10 +58,19 @@ Widget buildDrawer(BuildContext context) {
           title: const Text('About'),
           onTap: () {},
         ),
-        ListTile(
-          leading: const Icon(Icons.logout),
-          title: const Text('Log Out'),
-          onTap: () {},
+        BlocConsumer<AuthBloc, AuthState>(
+          listener: (context, state) {
+            // TODO: implement listener
+          },
+          builder: (context, state) {
+            return ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Log Out'),
+              onTap: () {
+                context.read<AuthBloc>().add(SignOut());
+              },
+            );
+          },
         ),
       ],
     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet_fit/models/ActivityModel.dart';
 import 'package:pet_fit/models/product_model.dart';
 import 'package:pet_fit/screens/pet_details_screen.dart';
 import 'package:pet_fit/models/pet_model.dart';
@@ -68,6 +69,41 @@ Widget petTiles(PetModel pet) {
               ]),
         ],
       ),
+    ),
+  );
+}
+
+Widget activityTiles(ActivityModel activity) {
+
+  DateTime selectedDateTime=activity.activityTime.toDate();
+  return Container(
+    margin: const EdgeInsets.all(10),
+    padding: const EdgeInsets.all(10),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(10.0),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 2,
+          blurRadius: 5,
+          offset: Offset(0, 3),
+        ),
+      ],
+    ),
+    child: Row(
+      children: [
+
+
+        Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Name: ${activity.name}"),
+              Text("Notes: ${activity.notes}"),
+              Text("Date: ${selectedDateTime.day}:${selectedDateTime.month}:${selectedDateTime.year}  Time: ${selectedDateTime.hour}:${selectedDateTime.minute}:${selectedDateTime.second}"),
+              ]),
+      ],
     ),
   );
 }

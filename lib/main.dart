@@ -19,6 +19,7 @@ import 'package:pet_fit/pet_list_module/pet_list_bloc.dart';
 import 'package:pet_fit/product_list_module/product_list_bloc.dart';
 import 'package:pet_fit/addPet/select_image_module/select_image_module_bloc.dart';
 import 'package:pet_fit/addPet/select_video_module/select_video_module_bloc.dart';
+import 'package:pet_fit/view_schedule/view_schedule_bloc.dart';
 
 import 'login_module/auth_state.dart';
 
@@ -78,6 +79,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CreateScheduleBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ViewScheduleBloc(),
         ),
 
       ],

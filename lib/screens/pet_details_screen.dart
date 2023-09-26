@@ -111,7 +111,7 @@ class PetDetailsScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Get.to(()=>const ViewSchedule());
+                      Get.to(()=> ViewSchedule(petId: "5wtvvCDR9N8OSfx5Mlin"));
                     },
                     child: const Column(
                       children: [

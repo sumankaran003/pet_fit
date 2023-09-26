@@ -24,5 +24,5 @@ String calculateAge(int dobTimestamp) {
     months += 12;
   }
 
-  return '${years} years, ${months} months, ${days} days';
+  return '$years years, $months months, $days days';
 }

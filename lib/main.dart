@@ -28,7 +28,7 @@ void main() async {
   await Firebase.initializeApp();
   FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

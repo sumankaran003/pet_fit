@@ -33,7 +33,7 @@ Widget buildDrawer(BuildContext context) {
           leading: const Icon(Icons.add),
           title: const Text('Add Pet'),
           onTap: () {
-            Get.to(() => AddPetScreen());
+            Get.to(() => const AddPetScreen());
           },
         ),
         ListTile(

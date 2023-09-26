@@ -336,29 +336,27 @@ class _AddPetScreenState extends State<AddPetScreen> {
                           if (state is ImagesUploadedState) {
                             images.addAll(state.imageUrls);
 
-                            return Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Selected photos",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  ListView(
-                                    shrinkWrap: true,
-                                    children: state.imageUrls
-                                        .map((url) => Text(
-                                              url,
-                                              overflow: TextOverflow.ellipsis,
-                                            ))
-                                        .toList(),
-                                  ),
-                                ],
-                              ),
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Selected photos",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                ListView(
+                                  shrinkWrap: true,
+                                  children: state.imageUrls
+                                      .map((url) => Text(
+                                            url,
+                                            overflow: TextOverflow.ellipsis,
+                                          ))
+                                      .toList(),
+                                ),
+                              ],
                             );
                           } else {
                             return Container();
@@ -370,29 +368,27 @@ class _AddPetScreenState extends State<AddPetScreen> {
                         builder: (context, state) {
                           if (state is VideosUploadedState) {
                             videos.addAll(state.videoUrls);
-                            return Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Selected videos",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  ListView(
-                                    shrinkWrap: true,
-                                    children: state.videoUrls
-                                        .map((url) => Text(
-                                              url,
-                                              overflow: TextOverflow.ellipsis,
-                                            ))
-                                        .toList(),
-                                  ),
-                                ],
-                              ),
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Selected videos",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                ListView(
+                                  shrinkWrap: true,
+                                  children: state.videoUrls
+                                      .map((url) => Text(
+                                            url,
+                                            overflow: TextOverflow.ellipsis,
+                                          ))
+                                      .toList(),
+                                ),
+                              ],
                             );
                           } else {
                             return Container();
@@ -404,29 +400,27 @@ class _AddPetScreenState extends State<AddPetScreen> {
                         builder: (context, state) {
                           if (state is CapturedImagesUploadedState) {
                             images.addAll(state.imageUrls);
-                            return Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Captured photos",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  ListView(
-                                    shrinkWrap: true,
-                                    children: state.imageUrls
-                                        .map((url) => Text(
-                                              url,
-                                              overflow: TextOverflow.ellipsis,
-                                            ))
-                                        .toList(),
-                                  ),
-                                ],
-                              ),
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Captured photos",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                ListView(
+                                  shrinkWrap: true,
+                                  children: state.imageUrls
+                                      .map((url) => Text(
+                                            url,
+                                            overflow: TextOverflow.ellipsis,
+                                          ))
+                                      .toList(),
+                                ),
+                              ],
                             );
                           } else {
                             return Container();
@@ -438,29 +432,27 @@ class _AddPetScreenState extends State<AddPetScreen> {
                         builder: (context, state) {
                           if (state is CapturedVideosUploadedState) {
                             videos.addAll(state.videoUrls);
-                            return Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Captured videos",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  ListView(
-                                    shrinkWrap: true,
-                                    children: state.videoUrls
-                                        .map((url) => Text(
-                                              url,
-                                              overflow: TextOverflow.ellipsis,
-                                            ))
-                                        .toList(),
-                                  ),
-                                ],
-                              ),
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Captured videos",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                ListView(
+                                  shrinkWrap: true,
+                                  children: state.videoUrls
+                                      .map((url) => Text(
+                                            url,
+                                            overflow: TextOverflow.ellipsis,
+                                          ))
+                                      .toList(),
+                                ),
+                              ],
                             );
                           } else {
                             return Container();

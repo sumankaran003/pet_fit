@@ -35,9 +35,7 @@ class _TakeVideoScreenState extends State<TakeVideoScreen> {
       );
       _initializeControllerFuture = _controller.initialize();
       setState(() {});
-    } catch (e) {
-      print('Error initializing camera: $e');
-    }
+    } catch (e) {}
   }
 
   @override
@@ -71,12 +69,11 @@ class _TakeVideoScreenState extends State<TakeVideoScreen> {
           try {
             await _initializeControllerFuture;
             await _controller.startVideoRecording();
-            await Future.delayed(Duration(seconds: 5)); //limiting to 5 sec
+            await Future.delayed(
+                const Duration(seconds: 5)); //limiting to 5 sec
             final video = await _controller.stopVideoRecording();
             Get.to(() => DisplayVideoScreen(videoPath: video.path));
-          } catch (e) {
-            print(e);
-          }
+          } catch (e) {}
         },
         child: const Icon(Icons.videocam),
       ),
@@ -110,14 +107,15 @@ class DisplayVideoScreen extends StatelessWidget {
                   _videoPlayerController.play();
                 });
               },
-              child: Text('Play'),
+              child: const Text('Play'),
             ),
             BlocConsumer<VideoCaptureBloc, VideoCaptureState>(
               listener: (context, state) {},
               builder: (context, state) {
                 return GestureDetector(
                     onTap: () {
-                      videoUploadBloc.add(UploadCaptureVideosEvent([File(videoPath)]));
+                      videoUploadBloc
+                          .add(UploadCaptureVideosEvent([File(videoPath)]));
                       Get.off(() => VideoCapturePage());
                     },
                     child: proceedButton("Proceed"));

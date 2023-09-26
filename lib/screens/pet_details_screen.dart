@@ -22,7 +22,8 @@ class PetDetailsScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding:  const EdgeInsets.only(left: 30.0, right: 30, top: 10, bottom: 10),
+          padding:
+              const EdgeInsets.only(left: 30.0, right: 30, top: 10, bottom: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -35,32 +36,44 @@ class PetDetailsScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               DetailsText(
                 field: "Name",
                 value: pet.name,
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               DetailsText(
                 field: "Breed",
                 value: pet.breed,
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               DetailsText(
                 field: "Location",
                 value: pet.location,
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               DetailsText(
                 field: "Age",
                 value: calculateAge(pet.dob.millisecondsSinceEpoch),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               DetailsText(
                 field: "Owner Id",
                 value: pet.ownerId,
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               const Text(
                 "Owner Details: ",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
@@ -69,7 +82,9 @@ class PetDetailsScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 30.0, right: 30),
                 child: Text(pet.ownerDetails),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -87,9 +102,10 @@ class PetDetailsScreen extends StatelessWidget {
                       child: const Icon(Icons.photo_album))
                 ],
               ),
-              const SizedBox(height: 20,),
-
-               Row(
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
@@ -97,27 +113,24 @@ class PetDetailsScreen extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   GestureDetector(
-                    onTap: (){
-
-                      Get.to(()=> CreateSchedule(petId: pet.petId));
-
+                    onTap: () {
+                      Get.to(() => CreateSchedule(petId: pet.petId));
                     },
                     child: const Column(
                       children: [
-                        Icon(Icons.calendar_month,),
+                        Icon(
+                          Icons.calendar_month,
+                        ),
                         Text("Create")
                       ],
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Get.to(()=> ViewSchedule(petId: pet.petId));
+                    onTap: () {
+                      Get.to(() => ViewSchedule(petId: pet.petId));
                     },
                     child: const Column(
-                      children: [
-                        Icon(Icons.list_alt),
-                        Text("View")
-                      ],
+                      children: [Icon(Icons.list_alt), Text("View")],
                     ),
                   )
                 ],
@@ -167,7 +180,7 @@ class DetailsText extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         SizedBox(
-          width: Get.width*0.5,
+          width: Get.width * 0.5,
           child: Text(
             value,
             overflow: TextOverflow.ellipsis,

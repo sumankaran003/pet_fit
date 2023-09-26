@@ -23,7 +23,7 @@ class _CreateScheduleState extends State<CreateSchedule> {
       context: context,
       initialDate: selectedDateTime,
       firstDate: DateTime(2013),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2030),
     );
 
     if (picked != null) {
@@ -69,7 +69,7 @@ class _CreateScheduleState extends State<CreateSchedule> {
         },
         builder: (context, state) {
           if (state is CreateScheduleLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           return SingleChildScrollView(
             child: Padding(
@@ -110,7 +110,7 @@ class _CreateScheduleState extends State<CreateSchedule> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -118,19 +118,19 @@ class _CreateScheduleState extends State<CreateSchedule> {
                     children: <Widget>[
                       Text(
                         'Selected Date: ${selectedDateTime.day}:${selectedDateTime.month}:${selectedDateTime.year}  Time: ${selectedDateTime.hour}:${selectedDateTime.minute}:${selectedDateTime.second}',
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
                     onPressed: () => _selectDateTime(context),
-                    child: Text('Select Time'),
+                    child: const Text('Select Time'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   const Text(

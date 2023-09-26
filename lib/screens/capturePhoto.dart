@@ -51,7 +51,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       setState(() {});
     } catch (e) {
       // Handle any errors that might occur during initialization.
-      print('Error initializing camera: $e');
+
     }
   }
     @override
@@ -118,7 +118,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               );
             } catch (e) {
               // If an error occurs, log the error to the console.
-              print(e);
+
             }
           },
           child: const Icon(Icons.camera_alt),

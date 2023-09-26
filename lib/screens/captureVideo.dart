@@ -4,8 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pet_fit/capture_video_module/capture_video.dart';
-import 'package:pet_fit/capture_video_module/capture_video_module_bloc.dart';
+import 'package:pet_fit/addPet/capture_video_module/capture_video.dart';
+import 'package:pet_fit/addPet/capture_video_module/capture_video_module_bloc.dart';
 import 'package:pet_fit/widgets.dart';
 import 'package:video_player/video_player.dart';
 
@@ -71,10 +71,9 @@ class _TakeVideoScreenState extends State<TakeVideoScreen> {
           try {
             await _initializeControllerFuture;
             await _controller.startVideoRecording();
-            await Future.delayed(Duration(seconds: 5));//limiting to 5 sec
-            final video= await _controller.stopVideoRecording();
-            Get.to(()=> DisplayVideoScreen(videoPath: video.path));
-
+            await Future.delayed(Duration(seconds: 5)); //limiting to 5 sec
+            final video = await _controller.stopVideoRecording();
+            Get.to(() => DisplayVideoScreen(videoPath: video.path));
           } catch (e) {
             print(e);
           }
@@ -93,7 +92,7 @@ class DisplayVideoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final VideoPlayerController _videoPlayerController =
-    VideoPlayerController.file(File(videoPath));
+        VideoPlayerController.file(File(videoPath));
     final videoUploadBloc = BlocProvider.of<VideoCaptureBloc>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('Video Preview')),
@@ -101,7 +100,7 @@ class DisplayVideoScreen extends StatelessWidget {
         child: Column(
           children: [
             AspectRatio(
-              aspectRatio: 3/4, // Adjust the aspect ratio as needed
+              aspectRatio: 3 / 4, // Adjust the aspect ratio as needed
               child: VideoPlayer(_videoPlayerController),
             ),
             ElevatedButton(
@@ -114,17 +113,14 @@ class DisplayVideoScreen extends StatelessWidget {
               child: Text('Play'),
             ),
             BlocConsumer<VideoCaptureBloc, VideoCaptureState>(
-              listener: (context, state) {
-
-              },
+              listener: (context, state) {},
               builder: (context, state) {
                 return GestureDetector(
                     onTap: () {
-
                       videoUploadBloc.add(UploadCaptureVideosEvent([File(videoPath)]));
-                      Get.off(()=>VideoCapturePage());
-
-                    }, child: proceedButton("Proceed"));
+                      Get.off(() => VideoCapturePage());
+                    },
+                    child: proceedButton("Proceed"));
               },
             )
           ],

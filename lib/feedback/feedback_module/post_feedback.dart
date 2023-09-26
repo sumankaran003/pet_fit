@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pet_fit/feedback_chip_module/feedback_chip.dart';
-import 'package:pet_fit/feedback_chip_module/feedbackchip_bloc.dart';
-import 'package:pet_fit/feedback_emoji_module/feedback_emoji.dart';
-import 'package:pet_fit/feedback_emoji_module/feedbackemoji_bloc.dart';
-import 'package:pet_fit/feedback_module/post_feedback_bloc.dart';
+import 'package:pet_fit/feedback/feedback_chip_module/feedback_chip.dart';
+import 'package:pet_fit/feedback/feedback_chip_module/feedbackchip_bloc.dart';
+import 'package:pet_fit/feedback/feedback_emoji_module/feedback_emoji.dart';
+import 'package:pet_fit/feedback/feedback_emoji_module/feedbackemoji_bloc.dart';
+import 'package:pet_fit/feedback/feedback_module/post_feedback_bloc.dart';
 import 'package:pet_fit/models/feedback_model.dart';
 import 'package:pet_fit/pet_list_module/pet_list_screen.dart';
 import 'package:pet_fit/utilMethods.dart';

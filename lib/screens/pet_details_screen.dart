@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet_fit/create_schedule/create_schedule_screen.dart';
 import 'package:pet_fit/models/age_model.dart';
 import 'package:pet_fit/models/pet_model.dart';
 import 'package:pet_fit/screens/photo_gallery.dart';
 import 'package:pet_fit/utilMethods.dart';
+import 'package:pet_fit/view_schedule/view_schedule.dart';
 import 'package:pet_fit/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -85,7 +87,44 @@ class PetDetailsScreen extends StatelessWidget {
                       child: const Icon(Icons.photo_album))
                 ],
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(height: 20,),
+
+               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Schedule: ",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+
+                      Get.to(()=>const CreateSchedule());
+
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(Icons.calendar_month,),
+                        Text("Create")
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(()=>const ViewSchedule());
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(Icons.list_alt),
+                        Text("View")
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               GestureDetector(
                   onTap: () async {
                     var url = Uri.parse('tel:+917001855752');
@@ -134,7 +173,7 @@ class DetailsText extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: const TextStyle(
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
               fontSize: 15,
             ),
           ),

@@ -3,12 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pet_fit/add_pet_module/add_pet_bloc.dart';
-import 'package:pet_fit/capture_image_module/capture_image_module_bloc.dart';
-import 'package:pet_fit/capture_video_module/capture_video_module_bloc.dart';
-import 'package:pet_fit/feedback_chip_module/feedbackchip_bloc.dart';
-import 'package:pet_fit/feedback_emoji_module/feedbackemoji_bloc.dart';
-import 'package:pet_fit/feedback_module/post_feedback_bloc.dart';
+import 'package:pet_fit/addPet/add_pet_module/add_pet_bloc.dart';
+import 'package:pet_fit/addPet/capture_image_module/capture_image_module_bloc.dart';
+import 'package:pet_fit/addPet/capture_video_module/capture_video_module_bloc.dart';
+import 'package:pet_fit/create_schedule/create_schedule_bloc.dart';
+import 'package:pet_fit/feedback/feedback_chip_module/feedbackchip_bloc.dart';
+import 'package:pet_fit/feedback/feedback_emoji_module/feedbackemoji_bloc.dart';
+import 'package:pet_fit/feedback/feedback_module/post_feedback_bloc.dart';
 import 'package:pet_fit/home_page_module/homapage.dart';
 import 'package:pet_fit/home_page_module/homepage_bloc.dart';
 import 'package:pet_fit/login_module/auth_bloc.dart';
@@ -16,8 +17,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_fit/login_module/auth_screen.dart';
 import 'package:pet_fit/pet_list_module/pet_list_bloc.dart';
 import 'package:pet_fit/product_list_module/product_list_bloc.dart';
-import 'package:pet_fit/select_image_module/select_image_module_bloc.dart';
-import 'package:pet_fit/select_video_module/select_video_module_bloc.dart';
+import 'package:pet_fit/addPet/select_image_module/select_image_module_bloc.dart';
+import 'package:pet_fit/addPet/select_video_module/select_video_module_bloc.dart';
 
 import 'login_module/auth_state.dart';
 
@@ -75,7 +76,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => VideoCaptureBloc(),
         ),
-
+        BlocProvider(
+          create: (context) => CreateScheduleBloc(),
+        ),
 
       ],
       child: BlocConsumer<AuthBloc, AuthState>(

@@ -1,63 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pet_fit/select_video_module/select_video_module_bloc.dart';
+import 'package:pet_fit/addPet/select_image_module/select_image_module_bloc.dart';
 import 'package:pet_fit/utilMethods.dart';
 
-class VideoPickerPage extends StatelessWidget {
+class ImagePickerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final videoPickerBloc = BlocProvider.of<VideoPickerBloc>(context);
+    final imagePickerBloc = BlocProvider.of<ImagePickerBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Video Uploader'),
+        title: const Text('Image Picker & Uploader'),
       ),
-      body: BlocConsumer<VideoPickerBloc, VideoPickerState>(
+      body: BlocConsumer<ImagePickerBloc, ImagePickerState>(
         listener: (context, state) {
-          if(state is VideoUploadFailure){
-            showSnackBar("Video upload failed", "Something went wrong", "failure");
+          if(state is ImageUploadFailure){
+             showSnackBar("Image upload failed", "Something went wrong", "failure");
           }
         },
         builder: (context, state) {
-          if (state is VideosPickedState) {
+          if (state is ImagesPickedState) {
             return Column(
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 1,
+                    itemCount: state.pickedImages.length,
                     itemBuilder: (context, index) {
-                      return Image.network(
-
-                        "https://cdn-icons-png.flaticon.com/512/4503/4503915.png",
-                        fit: BoxFit.cover,
-                      );
+                      return Image.file(state.pickedImages[index]);
                     },
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    videoPickerBloc.add(UploadVideosEvent([state.pickedVideos]));
+                    imagePickerBloc.add(UploadImagesEvent(state.pickedImages));
                   },
-                  child: const Text('Upload Video'),
+                  child: const Text('Upload Images'),
                 ),
               ],
             );
           }
-          else if(state is VideoUploadProgress){
+          else if(state is ImageUploadProgress){
             return const Center(child: CircularProgressIndicator());
           }
 
-          else if (state is VideosUploadedState) {
+          else if (state is ImagesUploadedState) {
             return Column(
               children: [
-                const Text('Video Successfully Uploaded'),
+                const Text('Images Successfully Uploaded'),
                 Expanded(
                   child: ListView(
-                    children: state.videoUrls
+                    children: state.imageUrls
                         .map((url) => Text(
-                      url, // Adjust the length as needed
-                      overflow: TextOverflow.ellipsis,
-                    ))
+                              url, // Adjust the length as needed
+                              overflow: TextOverflow.ellipsis,
+                            ))
                         .toList(),
                   ),
                 ),
@@ -73,9 +69,9 @@ class VideoPickerPage extends StatelessWidget {
             return Center(
               child: ElevatedButton(
                 onPressed: () {
-                  videoPickerBloc.add(PickVideosEvent());
+                  imagePickerBloc.add(PickImagesEvent());
                 },
-                child: const Text('Pick Video'),
+                child: const Text('Pick Images'),
               ),
             );
           }

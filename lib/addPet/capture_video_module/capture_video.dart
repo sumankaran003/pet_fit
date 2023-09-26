@@ -1,68 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pet_fit/add_pet_module/add_pet.dart';
-import 'package:pet_fit/capture_image_module/capture_image_module_bloc.dart';
+import 'package:pet_fit/addPet/add_pet_module/add_pet.dart';
+import 'package:pet_fit/addPet/capture_video_module/capture_video_module_bloc.dart';
 import 'package:pet_fit/utilMethods.dart';
 
-class ImageCapturePage extends StatefulWidget {
+class VideoCapturePage extends StatefulWidget {
   @override
-  State<ImageCapturePage> createState() => _ImageCapturePageState();
+  State<VideoCapturePage> createState() => _VideoCapturePageState();
 }
 
-class _ImageCapturePageState extends State<ImageCapturePage> {
+class _VideoCapturePageState extends State<VideoCapturePage> {
   @override
   Widget build(BuildContext context) {
-    final imageUploadBloc = BlocProvider.of<ImageCaptureBloc>(context);
+    final videoUploadBloc = BlocProvider.of<VideoCaptureBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Image Picker & Uploader'),
+        title: const Text('Video Picker & Uploader'),
       ),
-      body: BlocConsumer<ImageCaptureBloc, ImageCaptureState>(
+      body: BlocConsumer<VideoCaptureBloc, VideoCaptureState>(
         listener: (context, state) {
-          if (state is CaptureImageUploadFailure) {
+          if (state is CaptureVideoUploadFailure) {
             showSnackBar(
-                "Image upload failed", "Something went wrong", "failure");
+                "Video upload failed", "Something went wrong", "failure");
           }
           if (state is CameraNotAvailableState) {
             showSnackBar("Camera failed", "Something went wrong", "failure");
           }
         },
         builder: (context, state) {
-          if (state is ImagesCapturedState) {
+          if (state is VideosCapturedState) {
             return Column(
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: state.pickedImages.length,
+                    itemCount: state.pickedVideos.length,
                     itemBuilder: (context, index) {
-                      return Image.file(state.pickedImages[index]);
+                     // return Image.file(state.pickedVideos[index]);
+                      return Container();
                     },
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    imageUploadBloc
-                        .add(UploadCaptureImagesEvent(state.pickedImages));
+                    videoUploadBloc
+                        .add(UploadCaptureVideosEvent(state.pickedVideos));
                   },
-                  child: const Text('Upload Images'),
+                  child: const Text('Upload Videos'),
                 ),
               ],
             );
-          } else if (state is CaptureImageUploadProgress) {
+          } else if (state is CaptureVideoUploadProgress) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is CapturedImagesUploadedState) {
+          } else if (state is CapturedVideosUploadedState) {
             return Column(
               children: [
-                const Text('Images Successfully Uploaded'),
+                const Text('Videos Successfully Uploaded'),
                 Expanded(
                   child: ListView(
-                    children: state.imageUrls
+                    children: state.videoUrls
                         .map((url) => Text(
-                              url, // Adjust the length as needed
-                              overflow: TextOverflow.ellipsis,
-                            ))
+                      url, // Adjust the length as needed
+                      overflow: TextOverflow.ellipsis,
+                    ))
                         .toList(),
                   ),
                 ),
@@ -79,9 +80,9 @@ class _ImageCapturePageState extends State<ImageCapturePage> {
             return Center(
               child: ElevatedButton(
                 onPressed: () {
-                  imageUploadBloc.add(CaptureImagesEvent());
+                  videoUploadBloc.add(CaptureVideosEvent());
                 },
-                child: const Text('Capture Images'),
+                child: const Text('Capture Videos'),
               ),
             );
           }

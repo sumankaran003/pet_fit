@@ -4,8 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pet_fit/capture_image_module/capture_image.dart';
-import 'package:pet_fit/capture_image_module/capture_image_module_bloc.dart';
+import 'package:pet_fit/addPet/capture_image_module/capture_image.dart';
+import 'package:pet_fit/addPet/capture_image_module/capture_image_module_bloc.dart';
 import 'package:pet_fit/widgets.dart';
 
 

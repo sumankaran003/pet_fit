@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pet_fit/add_pet_module/add_pet.dart';
-import 'package:pet_fit/feedback_module/post_feedback.dart';
+import 'package:pet_fit/addPet/add_pet_module/add_pet.dart';
+import 'package:pet_fit/feedback/feedback_module/post_feedback.dart';
 import 'package:pet_fit/login_module/auth_bloc.dart';
 import 'package:pet_fit/login_module/auth_event.dart';
 import 'package:pet_fit/login_module/auth_state.dart';

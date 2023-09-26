@@ -1,62 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:pet_fit/add_pet_module/add_pet.dart';
-import 'package:pet_fit/capture_video_module/capture_video_module_bloc.dart';
+import 'package:pet_fit/addPet/select_video_module/select_video_module_bloc.dart';
 import 'package:pet_fit/utilMethods.dart';
 
-class VideoCapturePage extends StatefulWidget {
-  @override
-  State<VideoCapturePage> createState() => _VideoCapturePageState();
-}
-
-class _VideoCapturePageState extends State<VideoCapturePage> {
+class VideoPickerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final videoUploadBloc = BlocProvider.of<VideoCaptureBloc>(context);
+    final videoPickerBloc = BlocProvider.of<VideoPickerBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Video Picker & Uploader'),
+        title: const Text('Video Uploader'),
       ),
-      body: BlocConsumer<VideoCaptureBloc, VideoCaptureState>(
+      body: BlocConsumer<VideoPickerBloc, VideoPickerState>(
         listener: (context, state) {
-          if (state is CaptureVideoUploadFailure) {
-            showSnackBar(
-                "Video upload failed", "Something went wrong", "failure");
-          }
-          if (state is CameraNotAvailableState) {
-            showSnackBar("Camera failed", "Something went wrong", "failure");
+          if(state is VideoUploadFailure){
+            showSnackBar("Video upload failed", "Something went wrong", "failure");
           }
         },
         builder: (context, state) {
-          if (state is VideosCapturedState) {
+          if (state is VideosPickedState) {
             return Column(
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: state.pickedVideos.length,
+                    itemCount: 1,
                     itemBuilder: (context, index) {
-                     // return Image.file(state.pickedVideos[index]);
-                      return Container();
+                      return Image.network(
+
+                        "https://cdn-icons-png.flaticon.com/512/4503/4503915.png",
+                        fit: BoxFit.cover,
+                      );
                     },
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    videoUploadBloc
-                        .add(UploadCaptureVideosEvent(state.pickedVideos));
+                    videoPickerBloc.add(UploadVideosEvent([state.pickedVideos]));
                   },
-                  child: const Text('Upload Videos'),
+                  child: const Text('Upload Video'),
                 ),
               ],
             );
-          } else if (state is CaptureVideoUploadProgress) {
+          }
+          else if(state is VideoUploadProgress){
             return const Center(child: CircularProgressIndicator());
-          } else if (state is CapturedVideosUploadedState) {
+          }
+
+          else if (state is VideosUploadedState) {
             return Column(
               children: [
-                const Text('Videos Successfully Uploaded'),
+                const Text('Video Successfully Uploaded'),
                 Expanded(
                   child: ListView(
                     children: state.videoUrls
@@ -69,8 +63,7 @@ class _VideoCapturePageState extends State<VideoCapturePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Get.off(()=>AddPetScreen());
-
+                    Navigator.of(context).pop();
                   },
                   child: const Text('Done'),
                 ),
@@ -80,9 +73,9 @@ class _VideoCapturePageState extends State<VideoCapturePage> {
             return Center(
               child: ElevatedButton(
                 onPressed: () {
-                  videoUploadBloc.add(CaptureVideosEvent());
+                  videoPickerBloc.add(PickVideosEvent());
                 },
-                child: const Text('Capture Videos'),
+                child: const Text('Pick Video'),
               ),
             );
           }

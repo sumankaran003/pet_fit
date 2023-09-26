@@ -479,6 +479,7 @@ class _AddPetScreenState extends State<AddPetScreen> {
                             context
                                 .read<AddPetBloc>()
                                 .add(SubmitPetEvent(PetModel(
+                              petId: "",
                               name: _petNameController.text,
                               breed: _petBreedController.text,
                               location: _petLocationController.text,

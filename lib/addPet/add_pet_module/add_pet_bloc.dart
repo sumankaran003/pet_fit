@@ -27,6 +27,7 @@ class AddPetBloc extends Bloc<AddPetEvent, AddPetState> {
           FirebaseFirestore.instance.collection('pets');
 
       await petsCollection.add({
+        'petId':petModel.petId,
         'name': petModel.name,
         'breed': petModel.breed,
         'location': petModel.location,

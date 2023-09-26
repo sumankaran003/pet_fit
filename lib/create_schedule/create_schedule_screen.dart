@@ -8,8 +8,8 @@ import 'package:pet_fit/utilMethods.dart';
 import 'package:pet_fit/widgets.dart';
 
 class CreateSchedule extends StatefulWidget {
-  const CreateSchedule({super.key});
-
+  const CreateSchedule({super.key, required this.petId});
+  final String petId;
   @override
   State<CreateSchedule> createState() => _CreateScheduleState();
 }
@@ -159,13 +159,14 @@ class _CreateScheduleState extends State<CreateSchedule> {
                   ),
                   GestureDetector(
                       onTap: () {
-                        context
-                            .read<CreateScheduleBloc>()
-                            .add(AddScheduleEvent(ActivityModel(
+                        context.read<CreateScheduleBloc>().add(AddScheduleEvent(
+                            ActivityModel(
                               name: _activityNameController.text,
-                              activityTime: Timestamp.fromDate(selectedDateTime),
+                              activityTime:
+                                  Timestamp.fromDate(selectedDateTime),
                               notes: _notesController.text,
-                            )));
+                            ),
+                            widget.petId));
 
                         _activityNameController.clear();
                         _notesController.clear();

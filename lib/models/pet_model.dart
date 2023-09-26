@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PetModel {
+  final String petId;
   final String name;
   final String breed;
   final String location;
@@ -12,6 +13,7 @@ class PetModel {
   final List<String> videos;
 
   PetModel({
+    required this.petId,
     required this.name,
     required this.breed,
     required this.location,
@@ -25,6 +27,7 @@ class PetModel {
 
   factory PetModel.fromJson(Map<String, dynamic> json) {
     return PetModel(
+      petId: json['petId'],
       name: json['name'],
       breed: json['breed'],
       location: json['location'],
@@ -39,6 +42,7 @@ class PetModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'petId': petId,
       'name': name,
       'breed': breed,
       'location': location,

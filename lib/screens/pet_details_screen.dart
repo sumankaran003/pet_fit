@@ -99,7 +99,7 @@ class PetDetailsScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: (){
 
-                      Get.to(()=>const CreateSchedule());
+                      Get.to(()=> CreateSchedule(petId: pet.petId));
 
                     },
                     child: const Column(
@@ -111,7 +111,7 @@ class PetDetailsScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Get.to(()=> ViewSchedule(petId: "5wtvvCDR9N8OSfx5Mlin"));
+                      Get.to(()=> ViewSchedule(petId: pet.petId));
                     },
                     child: const Column(
                       children: [

@@ -27,9 +27,11 @@ class PetService {
     final QuerySnapshot snapshot = await firestore.collection('pets').get();
 
 
-    return snapshot.docs
-        .map((doc) => PetModel.fromJson(doc.data() as Map<String, dynamic>))
-        .toList();
+    return snapshot.docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      data['petId'] = doc.id;
+      return PetModel.fromJson(data);
+    }).toList();
   }
 }
 

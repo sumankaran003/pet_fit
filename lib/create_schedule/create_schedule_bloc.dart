@@ -14,7 +14,7 @@ class CreateScheduleBloc
     on<AddScheduleEvent>((event, emit) {
       try {
         emit(CreateScheduleLoading());
-        addActivity("5wtvvCDR9N8OSfx5Mlin", event.activityModel);
+        addActivity( event.petId, event.activityModel);
         emit(CreateScheduleSuccess());
       } catch (e) {
         emit(CreateScheduleFailure(e.toString()));
